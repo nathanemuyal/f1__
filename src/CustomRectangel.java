@@ -35,8 +35,7 @@ public class CustomRectangel extends Canvas {
 
 
     public void paint(Graphics Graphics, String pic) {
-        //Graphics.fillRect(this.x, this.y, this.width, this.heighet);
-        //Graphics.setColor(this.color);
+
         Toolkit tool = Toolkit.getDefaultToolkit();
         Image i = tool.getImage(pic);
         Graphics.drawImage(i,this.x+1,this.y,this.width,this.heighet,this);
@@ -97,13 +96,7 @@ public class CustomRectangel extends Canvas {
             collision = true;
         }
         return collision;
-    }/*
-    Image img = new ImageIcon("C:\Nouveau dossier\shaiSadna\.idea\photo\red bull f1.png");
-    public void paint(Graphics g){
-        g.drawImage(img,this.x, this.y, this.width,this.heighet,this);
-
-
-    }*/
+    }
     public void paint(Graphics g){
         g.setColor(this.color);
         g.fillRect(this.x,this.y,this.width,this.heighet);

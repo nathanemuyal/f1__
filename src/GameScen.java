@@ -13,9 +13,9 @@ public class GameScen extends JPanel  {
         this.setBounds(x, y, WHIDTH, HIGHET);
         //first screen  +button start +image +color gray in background
 
-        JButton start = new JButton("start game");
+      /*  JButton start = new JButton("start game");
         start.setBounds(WHIDTH/2,0,100,50);
-        add(start);
+        add(start);*/
 
 
 
@@ -59,6 +59,7 @@ public class GameScen extends JPanel  {
             String c =obstacles[i].getPhoto();
             this.obstacles[i].paint(g, c);
         }
+
     }
 
     //calcul limit

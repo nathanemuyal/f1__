@@ -4,7 +4,7 @@ import java.awt.*;
 public class Car extends JPanel{
 
     public CustomRectangel Formola;
-    private String standingGuy = "C:\\Nouveau dossier\\shaiSadna\\.idea\\photo\\mercedese f1.png" ;
+    private String standingGuy = "src/mercedese f1.png" ;
     public Car() {
 
         this.Formola = new CustomRectangel(125,500, standingGuy);

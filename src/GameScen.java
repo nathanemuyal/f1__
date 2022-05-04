@@ -124,10 +124,10 @@ public class GameScen extends JPanel  {
     }
     public String randomImage(){
         String[] imageURL = new String[4];
-        imageURL[0]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\alpina final.png";
-        imageURL[1]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\mercedese f1.png";
-        imageURL[2]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\red.png";
-        imageURL[3]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\red bull f1.png";
+        imageURL[0]="src/alpina final.png";
+        imageURL[1]="src/mercedese f1.png";
+        imageURL[2]="src/red.png";
+        imageURL[3]="src/red bull f1.png";
 
         Random random = new Random();
 

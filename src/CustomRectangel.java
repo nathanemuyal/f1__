@@ -29,6 +29,7 @@ public class CustomRectangel extends Canvas {
     public int getHeighet() {
         return heighet;
     }
+    public String getPhoto(){return photo;}
 
     private Color color;
 

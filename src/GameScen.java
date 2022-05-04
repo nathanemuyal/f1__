@@ -6,16 +6,12 @@ import java.util.Random;
 public class GameScen extends JPanel  {
     private Car pleyer;
     private CustomRectangel[] obstacles;
-    private ImageIcon mercedes;
-    private ImageIcon redBull;
-    private ImageIcon alfaRomeo;
-    private ImageIcon alpine;
+
 
     public GameScen(int x, int y, int WHIDTH, int HIGHET) {
 
         this.setBounds(x, y, WHIDTH, HIGHET);
-        //first scrin
-        //button start+image+color gray
+        //first screen  +button start +image +color gray in background
 
         JButton start = new JButton("start game");
         start.setBounds(WHIDTH/2,0,100,50);
@@ -27,7 +23,7 @@ public class GameScen extends JPanel  {
         this.pleyer = new Car();
         this.mainGameLoop();
 
-        //obstacles+image
+        //obstacles  +image+bug
         Random random = new Random();
         int lower = -20000;
         int maxer = 1;
@@ -37,12 +33,12 @@ public class GameScen extends JPanel  {
             do {
                 int e = limit(random.nextInt(WHIDTH));
 
-                obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, "C:\\Nouveau dossier\\shaiSadna\\.idea\\photo\\red.png");
+                obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, randomImage() );//image
             } while (obstacle.CheckCollision(this.pleyer.getFront()));
             this.obstacles[i] = obstacle;
 
         }
-        //game over++
+        //game over +new screen
 
     }
 
@@ -55,11 +51,12 @@ public class GameScen extends JPanel  {
 
         //border
 
-        String c = "C:\\Nouveau dossier\\shaiSadna\\.idea\\photo\\mercedese f1.png";
         //player
+
         this.pleyer.paintComponent(g);
-        //obstacl
+        //obstacle
         for (int i = 0; i < this.obstacles.length; i++) {
+            String c =obstacles[i].getPhoto();
             this.obstacles[i].paint(g, c);
         }
     }
@@ -78,11 +75,16 @@ public class GameScen extends JPanel  {
      //MoveDownObstackes
     public void moveDownObstacles() {
         for (int i = 0; i < obstacles.length; i++) {
-            obstacles[i].MoveDownObstacles();
+            try {
+                obstacles[i].MoveDownObstacles();
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+
         }
     }
 
-    //game over//collision
+    //game over//collision + bug + if obstacle collision in another obstacle
     public void gameOver() {
         for (int i = 0; i < obstacles.length; i++) {
             obstacles[i].MoveDownObstacles();
@@ -104,7 +106,12 @@ public class GameScen extends JPanel  {
             this.addKeyListener(PleyerMovment);
             while (true) {
                 try {
-                  moveDownObstacles();
+                    try {
+                        moveDownObstacles();
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
+                    }
+
                     gameOver();
                     repaint();
                     Thread.sleep(15);
@@ -113,6 +120,18 @@ public class GameScen extends JPanel  {
                 }
             }
         }).start();
+    }
+    public String randomImage(){
+        String[] imageURL = new String[4];
+        imageURL[0]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\alpina final.png";
+        imageURL[1]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\mercedese f1.png";
+        imageURL[2]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\red.png";
+        imageURL[3]="C:\\Users\\User\\IdeaProjects\\F1_2022\\src\\red bull f1.png";
+
+        Random random = new Random();
+
+        String a=imageURL[random.nextInt(4)];
+        return a;
     }
 
 }

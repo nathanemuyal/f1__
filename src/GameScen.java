@@ -108,8 +108,9 @@ public class GameScen extends JPanel {
         //player
         this.pleyer.paintComponent(g);
         //obstacle
-        for (int i = 0; i < this.obstacles.length; i++) {
+        for (int i = 0; i < this.obstacles.length-5; i++) {
             String c = obstacles[i].getPhoto();
+            //if (obstacles[i].CheckCollision(obstacles[i+5]))
             this.obstacles[i].paint(g, c);
         }
         // }
@@ -136,8 +137,9 @@ public class GameScen extends JPanel {
                 try {
                     if(obstacles[i]==null)
                         System.out.print(" ");
-                        else
+                        else{
                     obstacles[i].MoveDownObstacles();
+                        }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
@@ -186,15 +188,14 @@ public class GameScen extends JPanel {
     }
 
     public String randomImage() {
-        String[] imageURL = new String[4];
+        String[] imageURL = new String[3];
         imageURL[0] = "src/alpina final.png";
-        imageURL[1] = "src/mercedese f1.png";
-        imageURL[2] = "src/red.png";
-        imageURL[3] = "src/red bull f1.png";
+        imageURL[1] = "src/red.png";
+        imageURL[2] = "src/red bull f1.png";
 
         Random random = new Random();
 
-        String a = imageURL[random.nextInt(4)];
+        String a = imageURL[random.nextInt(3)];
         return a;
     }
 

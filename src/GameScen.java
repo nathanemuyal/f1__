@@ -16,6 +16,9 @@ public class GameScen extends JPanel {
     public boolean winer = true;
     public boolean play = false;
 
+    private final JButton start = new JButton("start game");
+    private final  JButton restart = new JButton("Restart");
+
 
     public GameScen(int x, int y, int WHIDTH, int HIGHET) {
 
@@ -58,19 +61,20 @@ public class GameScen extends JPanel {
         g.setColor(Color.gray);
         g.fillRect(0, 0, getWidth(), getHeight());
         //start
+
         if (startGame==true&&play==false) {
             g.drawImage(this.logo.getImage(), getWidth() / 2 - 200, getHeight() / 2 - 150, 400, 100, null);
-            JButton start = new JButton("start game");
+
             start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
             add(start);
 
-                start.addActionListener((event) -> {
-                    this.startGame = false;
-                    this.play=true;
-                    System.out.println("fg");
-                    start.setVisible(false);
+            start.addActionListener((event) -> {
+                this.startGame = false;
+                this.play = true;
+                System.out.println("fg");
+                start.setVisible(false);
 
-                });
+            });
 
         }
 
@@ -91,19 +95,6 @@ public class GameScen extends JPanel {
         //restart
 
         if (play == false) {
-           /* if (startGame==true){
-                g.drawImage(this.logo.getImage(), getWidth() / 2 - 200, getHeight() / 2 - 150, 400, 100, null);
-                JButton start = new JButton("start game");
-                start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
-
-                start.addActionListener((event) -> {
-                    this.play=true;
-                    this.startGame = false;
-                    System.out.println("2");
-
-                });
-                add(start);
-            }*/
             if (winer == false) {
                 this.setVisible(true);
                 this.setLayout(null);
@@ -112,9 +103,18 @@ public class GameScen extends JPanel {
                 g.drawString("Game over ", 140, 200);
                 g.drawString(" enter to the restart ", getWidth()/2-230, 250);
                 g.drawString("your Score " + score, 110, 300);
-                JButton restart = new JButton("Restart");
+
                 restart.setBounds(getWidth()/2-75, 350, 150, 100);
                 this.add(restart);
+                restart.addActionListener((event) -> {
+                    score=0;
+                    play=true;
+                    winer=true;
+                    restart.setVisible(false);
+
+                });
+            }
+
             }
         }
         //win
@@ -128,21 +128,23 @@ public class GameScen extends JPanel {
             g.setFont(new Font("serif", Font.BOLD, 50));
             g.drawString("you win", getWidth()/2-75, 270);
             g.drawString(" enter to the restart ", getWidth()/2-230, 325);
-            JButton restart = new JButton("Restart");
+
             restart.setBounds(getWidth()/2-75, 350, 150, 100);
             this.add(restart);
             restart.addActionListener((event) -> {
-
-                System.out.println("1");
+                play=true;
+                winer=true;
+                score=0;
+                restart.setVisible(false);
 
             });
         }
 
-        }
-        // }
+
 
 
     }
+
 
     //calcul limit
     public int limit(int a) {

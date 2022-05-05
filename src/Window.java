@@ -6,7 +6,7 @@ public class Window extends JFrame {
         Window window = new Window();
     }
 
-    public static final int WINDOW_WHIDTH = 350;
+    public static final int WINDOW_WHIDTH = 500;
     public static final int WINDOW_HIGHET = 700;
 
     public Window() {
@@ -18,6 +18,7 @@ public class Window extends JFrame {
         this.setVisible(true);
         this.setLayout(null);
         this.setResizable(false);
+        this.setTitle("F1 2022 ");
 
     }
 }

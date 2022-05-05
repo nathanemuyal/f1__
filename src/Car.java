@@ -8,7 +8,7 @@ public class Car extends JPanel {
 
     public Car() {
 
-        this.Formola = new CustomRectangel(125, 500, standingGuy);
+        this.Formola = new CustomRectangel(200, 500, standingGuy);
     }
 
 

@@ -32,14 +32,15 @@ public class GameScen extends JPanel {
 
         //obstacles  +image+bug
         Random random = new Random();
-        int lower = -20000;
+        int lower = -80000;
         int maxer = 1;
-        this.obstacles = new CustomRectangel[100];
+        this.obstacles = new CustomRectangel[350];
         for (int i = 0; i < this.obstacles.length; i++) {
             CustomRectangel obstacle = null;
             do {
                 int e = limit(random.nextInt(WHIDTH));
-
+                //for (int j = 0; j < obstacles.length; j++) {
+              //  }
                 obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, randomImage());//image
             } while (obstacle.CheckCollision(this.pleyer.getFront()));
             this.obstacles[i] = obstacle;
@@ -133,6 +134,9 @@ public class GameScen extends JPanel {
         if (play == true) {
             for (int i = 0; i < obstacles.length; i++) {
                 try {
+                    if(obstacles[i]==null)
+                        System.out.print(" ");
+                        else
                     obstacles[i].MoveDownObstacles();
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -173,8 +177,8 @@ public class GameScen extends JPanel {
 
                     gameOver();
                     repaint();
-                    Thread.sleep(7);
-                } catch (InterruptedException e) {
+                    Thread.sleep(5);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

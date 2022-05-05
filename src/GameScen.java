@@ -10,11 +10,11 @@ public class GameScen extends JPanel {
     private ImageIcon I_no_have_idia;
     private ImageIcon I_no_hve_idia2;
     private int y_image = 0;
-    public boolean startGame = false;
+    public boolean startGame = true;
     private ImageIcon logo;
     private int score = 0;
     public boolean winer = true;
-    public boolean play = true;
+    public boolean play = false;
 
 
     public GameScen(int x, int y, int WHIDTH, int HIGHET) {
@@ -58,25 +58,52 @@ public class GameScen extends JPanel {
         g.setColor(Color.gray);
         g.fillRect(0, 0, getWidth(), getHeight());
         //start
-       /* if (!startGame) {
+        if (startGame==true&&play==false) {
             g.drawImage(this.logo.getImage(), getWidth() / 2 - 200, getHeight() / 2 - 150, 400, 100, null);
             JButton start = new JButton("start game");
             start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
+            add(start);
 
                 start.addActionListener((event) -> {
-                    this.startGame = true;
+                    this.startGame = false;
+                    this.play=true;
                     System.out.println("fg");
+                    start.setVisible(false);
 
                 });
-            add(start);
+
         }
-        if (startGame) {*/
+
+
         //score
         g.setColor(Color.black);
         g.setFont(new Font("serif", Font.BOLD, 20));
         g.drawString("Score "+score, getWidth() / 2 - 30, 20);
+
+        //player
+        this.pleyer.paintComponent(g);
+        //obstacle
+        for (int i = 0; i < this.obstacles.length-5; i++) {
+            String c = obstacles[i].getPhoto();
+            //if (obstacles[i].CheckCollision(obstacles[i+5]))
+            this.obstacles[i].paint(g, c);
+
         //restart
+
         if (play == false) {
+           /* if (startGame==true){
+                g.drawImage(this.logo.getImage(), getWidth() / 2 - 200, getHeight() / 2 - 150, 400, 100, null);
+                JButton start = new JButton("start game");
+                start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
+
+                start.addActionListener((event) -> {
+                    this.play=true;
+                    this.startGame = false;
+                    System.out.println("2");
+
+                });
+                add(start);
+            }*/
             if (winer == false) {
                 this.setVisible(true);
                 this.setLayout(null);
@@ -104,14 +131,13 @@ public class GameScen extends JPanel {
             JButton restart = new JButton("Restart");
             restart.setBounds(getWidth()/2-75, 350, 150, 100);
             this.add(restart);
+            restart.addActionListener((event) -> {
+
+                System.out.println("1");
+
+            });
         }
-        //player
-        this.pleyer.paintComponent(g);
-        //obstacle
-        for (int i = 0; i < this.obstacles.length-5; i++) {
-            String c = obstacles[i].getPhoto();
-            //if (obstacles[i].CheckCollision(obstacles[i+5]))
-            this.obstacles[i].paint(g, c);
+
         }
         // }
 

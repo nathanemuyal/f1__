@@ -82,11 +82,11 @@ public class GameScen extends JPanel {
                 this.setLayout(null);
                 g.setColor(Color.BLACK);
                 g.setFont(new Font("serif", Font.BOLD, 50));
-                g.drawString("Game over :", 148, 200);
-                g.drawString(" enter to the restart :", 50, 250);
-                g.drawString("your Score :" + score, 110, 300);
-                JButton restart = new JButton("Start");
-                restart.setBounds(220, 350, 150, 100);
+                g.drawString("Game over ", 140, 200);
+                g.drawString(" enter to the restart ", getWidth()/2-230, 250);
+                g.drawString("your Score " + score, 110, 300);
+                JButton restart = new JButton("Restart");
+                restart.setBounds(getWidth()/2-75, 350, 150, 100);
                 this.add(restart);
             }
         }
@@ -99,10 +99,10 @@ public class GameScen extends JPanel {
             winer = true;
             g.setColor(Color.black);
             g.setFont(new Font("serif", Font.BOLD, 50));
-            g.drawString("you win:", 200, 270);
-            g.drawString(" enter to the restart :", 80, 325);
-            JButton restart = new JButton("Start");
-            restart.setBounds(220, 350, 150, 100);
+            g.drawString("you win", getWidth()/2-75, 270);
+            g.drawString(" enter to the restart ", getWidth()/2-230, 325);
+            JButton restart = new JButton("Restart");
+            restart.setBounds(getWidth()/2-75, 350, 150, 100);
             this.add(restart);
         }
         //player

@@ -15,6 +15,7 @@ public class GameScen extends JPanel {
     private int score = 0;
     public boolean winer = true;
     public boolean play = false;
+    public boolean button_restart = true ;
 
     private final JButton start = new JButton("start game");
     private final  JButton restart = new JButton("Restart");
@@ -103,6 +104,10 @@ public class GameScen extends JPanel {
                 g.drawString("Game over ", 140, 200);
                 g.drawString(" enter to the restart ", getWidth()/2-230, 250);
                 g.drawString("your Score " + score, 110, 300);
+                if (button_restart=true){
+                    restart.setVisible(true);
+                    button_restart=false;
+                }
 
                 restart.setBounds(getWidth()/2-75, 350, 150, 100);
                 this.add(restart);
@@ -111,6 +116,7 @@ public class GameScen extends JPanel {
                     play=true;
                     winer=true;
                     restart.setVisible(false);
+                    button_restart=true;
 
                 });
             }

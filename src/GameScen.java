@@ -34,24 +34,10 @@ public class GameScen extends JPanel {
         this.pleyer = new Car();
         this.mainGameLoop();
 
-        //obstacles  +image+bug
-        Random random = new Random();
-        int lower = -80000;
-        int maxer = 1;
+        //obstacles  +image obstacles +bug
         this.obstacles = new CustomRectangel[350];
-        for (int i = 0; i < this.obstacles.length; i++) {
-            CustomRectangel obstacle = null;
-            do {
-                int e = limit(random.nextInt(WHIDTH));
-                //for (int j = 0; j < obstacles.length; j++) {
-              //  }
-                obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, randomImage());//image
-            } while (obstacle.CheckCollision(this.pleyer.getFront()));
-            this.obstacles[i] = obstacle;
+        new_obstacles();
 
-        }
-
-        //game over +new screen
 
     }
 
@@ -70,9 +56,9 @@ public class GameScen extends JPanel {
             add(start);
 
             start.addActionListener((event) -> {
+
                 this.startGame = false;
                 this.play = true;
-                System.out.println("fg");
                 start.setVisible(false);
 
             });
@@ -90,7 +76,6 @@ public class GameScen extends JPanel {
         //obstacle
         for (int i = 0; i < this.obstacles.length-5; i++) {
             String c = obstacles[i].getPhoto();
-            //if (obstacles[i].CheckCollision(obstacles[i+5]))
             this.obstacles[i].paint(g, c);
 
         //restart
@@ -112,6 +97,7 @@ public class GameScen extends JPanel {
                 restart.setBounds(getWidth()/2-75, 350, 150, 100);
                 this.add(restart);
                 restart.addActionListener((event) -> {
+                    new_obstacles();
                     score=0;
                     play=true;
                     winer=true;
@@ -164,7 +150,7 @@ public class GameScen extends JPanel {
         }
     }
 
-    //MoveDownObstackes
+    //MoveDownObstaces
     public void moveDownObstacles() {
         if (play == true) {
             for (int i = 0; i < obstacles.length; i++) {
@@ -182,7 +168,7 @@ public class GameScen extends JPanel {
         }
     }
 
-    //game over//collision + bug + if obstacle collision in another obstacle
+    //game over
     public void gameOver() {
         for (int i = 0; i < obstacles.length; i++) {
           //  obstacles[i].MoveDownObstacles();
@@ -231,6 +217,23 @@ public class GameScen extends JPanel {
 
         String a = imageURL[random.nextInt(3)];
         return a;
+    }
+    public  void new_obstacles(){
+        Random random = new Random();
+        int lower = -80000;
+        int maxer = 1;
+
+        for (int i = 0; i < this.obstacles.length; i++) {
+            CustomRectangel obstacle = null;
+            do {
+                int e = limit(random.nextInt(getWidth()));
+
+                obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, randomImage());//image
+            } while (obstacle.CheckCollision(this.pleyer.getFront()));
+            this.obstacles[i] = obstacle;
+
+        }
+
     }
 
 }

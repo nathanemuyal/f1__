@@ -22,8 +22,16 @@ public class CustomRectangel extends Canvas {
         return width;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public int getX() {
         return this.x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getY() {
@@ -53,7 +61,10 @@ public class CustomRectangel extends Canvas {
         this.photo = guy;
 
     }
+    public CustomRectangel( String guy) {
+        this.photo = guy;
 
+    }
     public void MoveRighetCar() {
         this.x = x + 5;
         this.x = limit(x);

@@ -6,8 +6,8 @@ import java.awt.event.KeyEvent;
 
 public class GameScen extends JPanel {
     private Car pleyer;
-    boolean obstaclesCreated=false;
-   // private CustomRectangel[] obstacles;//עוד מעט שינוי
+    boolean obstaclesCreated = false;
+    // private CustomRectangel[] obstacles;//עוד מעט שינוי
     private ImageIcon I_no_have_idia;
     private ImageIcon I_no_hve_idia2;
     private int y_image = 0;
@@ -16,10 +16,10 @@ public class GameScen extends JPanel {
     private int score = 0;
     public boolean winer = true;
     public boolean play = false;
-    public boolean button_restart = true ;
+    public boolean button_restart = true;
 
     private final JButton start = new JButton("start game");
-    private final  JButton restart = new JButton("Restart");
+    private final JButton restart = new JButton("Restart");
 
 
     public GameScen(int x, int y, int WHIDTH, int HIGHET) {
@@ -37,46 +37,44 @@ public class GameScen extends JPanel {
 
 
         //obstacles  +image obstacles +bug
-       // this.obstacles = new CustomRectangel[350];**
-      //  new_obstacles();**
+        // this.obstacles = new CustomRectangel[350];**
+        //  new_obstacles();**
 
 
     }
-    public CustomRectangel[] obstacles = new CustomRectangel[350];
-    public void createObstacles()
-    {
-        for (int i=0; i<obstacles.length; i++)
-        {
+
+    public CustomRectangel[] obstacles = new CustomRectangel[150];
+
+    public void createObstacles() {
+        for (int i = 0; i < obstacles.length; i++) {
             CustomRectangel obstacle = new CustomRectangel(randomImage());
 
-            do
-            {
+            do {
                 randomPlace(obstacle);
             }
             while (obstaclesAreTouching(obstacle, i));
 
             obstacles[i] = obstacle;
         }
-        obstaclesCreated=true;
+        obstaclesCreated = true;
 
     }
-    private boolean obstaclesAreTouching(CustomRectangel obstacle, int index)
-    {
-        for (int i=0; i<index; i++)
-        {
-            if (obstacle.CheckCollision(obstacles[i]))
-            {
+
+    private boolean obstaclesAreTouching(CustomRectangel obstacle, int index) {
+        for (int i = 0; i < index; i++) {
+            if (obstacle.CheckCollision(obstacles[i])) {
                 return true;
             }
         }
 
         return false;
     }
-    private void randomPlace(CustomRectangel obstacle)
-    {
+
+    private void randomPlace(CustomRectangel obstacle) {
         Random rnd = new Random();
-        int lower = -80000;
-        int maxer = 1;;
+        int lower = -30000;
+        int maxer = 1;
+        ;
         int e = limit(rnd.nextInt(500));
         obstacle.setX(e);
         obstacle.setY(rnd.nextInt(maxer - lower) + lower);
@@ -90,7 +88,7 @@ public class GameScen extends JPanel {
         g.fillRect(0, 0, getWidth(), getHeight());
         //start
 
-        if (startGame==true&&play==false) {
+        if (startGame == true && play == false) {
             g.drawImage(this.logo.getImage(), getWidth() / 2 - 200, getHeight() / 2 - 150, 400, 100, null);
 
             start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
@@ -110,44 +108,44 @@ public class GameScen extends JPanel {
         //score
         g.setColor(Color.black);
         g.setFont(new Font("serif", Font.BOLD, 20));
-        g.drawString("Score "+score, getWidth() / 2 - 30, 20);
+        g.drawString("Score " + score, getWidth() / 2 - 30, 20);
 
         //player
         this.pleyer.paintComponent(g);
         //obstacle
-        for (int i = 0; i < this.obstacles.length-5; i++) {
+        for (int i = 0; i < this.obstacles.length - 5; i++) {
             String c = obstacles[i].getPhoto();
             this.obstacles[i].paint(g, c);
 
-        //restart
+            //restart
 
-        if (play == false) {
-            if (winer == false) {
-                this.setVisible(true);
-                this.setLayout(null);
-                g.setColor(Color.BLACK);
-                g.setFont(new Font("serif", Font.BOLD, 50));
-                g.drawString("Game over ", 140, 200);
-                g.drawString(" enter to the restart ", getWidth()/2-230, 250);
-                g.drawString("your Score " + score, 110, 300);
-                if (button_restart=true){
-                    restart.setVisible(true);
-                    button_restart=false;
+            if (play == false) {
+                if (winer == false) {
+                    this.setVisible(true);
+                    this.setLayout(null);
+                    g.setColor(Color.BLACK);
+                    g.setFont(new Font("serif", Font.BOLD, 50));
+                    g.drawString("Game over ", 140, 200);
+                    g.drawString(" enter to the restart ", getWidth() / 2 - 230, 250);
+                    g.drawString("your Score " + score, 110, 300);
+                    if (button_restart = true) {
+                        restart.setVisible(true);
+                        button_restart = false;
+                    }
+
+                    restart.setBounds(getWidth() / 2 - 75, 350, 150, 100);
+                    this.add(restart);
+                    restart.addActionListener((event) -> {
+                        //  new_obstacles();
+                        createObstacles();
+                        score = 0;
+                        play = true;
+                        winer = true;
+                        restart.setVisible(false);
+                        button_restart = true;
+
+                    });
                 }
-
-                restart.setBounds(getWidth()/2-75, 350, 150, 100);
-                this.add(restart);
-                restart.addActionListener((event) -> {
-                  //  new_obstacles();
-                    createObstacles();
-                    score=0;
-                    play=true;
-                    winer=true;
-                    restart.setVisible(false);
-                    button_restart=true;
-
-                });
-            }
 
             }
         }
@@ -160,21 +158,19 @@ public class GameScen extends JPanel {
             winer = true;
             g.setColor(Color.black);
             g.setFont(new Font("serif", Font.BOLD, 50));
-            g.drawString("you win", getWidth()/2-75, 270);
-            g.drawString(" enter to the restart ", getWidth()/2-230, 325);
+            g.drawString("you win", getWidth() / 2 - 75, 270);
+            g.drawString(" enter to the restart ", getWidth() / 2 - 230, 325);
 
-            restart.setBounds(getWidth()/2-75, 350, 150, 100);
+            restart.setBounds(getWidth() / 2 - 75, 350, 150, 100);
             this.add(restart);
             restart.addActionListener((event) -> {
-                play=true;
-                winer=true;
-                score=0;
+                play = true;
+                winer = true;
+                score = 0;
                 restart.setVisible(false);
 
             });
         }
-
-
 
 
     }
@@ -197,11 +193,11 @@ public class GameScen extends JPanel {
         if (play == true) {
             for (int i = 0; i < obstacles.length; i++) {
                 try {
-                    if(obstacles[i]==null)
+                    if (obstacles[i] == null)
                         System.out.print(" ");
-                        else{
-                    obstacles[i].MoveDownObstacles();
-                        }
+                    else {
+                        obstacles[i].MoveDownObstacles();
+                    }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
@@ -213,11 +209,11 @@ public class GameScen extends JPanel {
     //game over
     public void gameOver() {
         for (int i = 0; i < obstacles.length; i++) {
-          //  obstacles[i].MoveDownObstacles();
+            //  obstacles[i].MoveDownObstacles();
             if (obstacles[i].CheckCollision(this.pleyer.getFront())) {
 
                 play = false;
-                winer=false;
+                winer = false;
             }
         }
     }
@@ -237,7 +233,7 @@ public class GameScen extends JPanel {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
-                    if(play==true)
+                    if (play == true)
                         score++;
                     gameOver();
                     repaint();
@@ -250,32 +246,17 @@ public class GameScen extends JPanel {
     }
 
     public String randomImage() {
-        String[] imageURL = new String[3];
+        String[] imageURL = new String[4];
         imageURL[0] = "src/alpina final.png";
         imageURL[1] = "src/red.png";
         imageURL[2] = "src/red bull f1.png";
+        imageURL[3] = "src/mercedese f1.png";
 
         Random random = new Random();
 
-        String a = imageURL[random.nextInt(3)];
+        String a = imageURL[random.nextInt(4)];
         return a;
     }
-    /*public  void new_obstacles(){
-        Random random = new Random();
-        int lower = -80000;
-        int maxer = 1;
 
-        for (int i = 0; i < this.obstacles.length; i++) {
-            CustomRectangel obstacle = null;
-            do {
-                int e = limit(random.nextInt(getWidth()));
 
-                obstacle = new CustomRectangel(e, random.nextInt(maxer - lower) + lower, randomImage());//image
-            } while (obstacle.CheckCollision(this.pleyer.getFront()));
-            this.obstacles[i] = obstacle;
-
-        }
-
-    }
-*/
 }

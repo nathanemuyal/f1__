@@ -69,7 +69,7 @@ public class GameScen extends JPanel {
     private void randomPlace(CustomRectangel obstacle) {
         Random rnd = new Random();
         int lower = -30000;
-        int maxer = 1;
+        int maxer = -100;
         ;
         int e = limit(rnd.nextInt(500));
         obstacle.setX(e);
@@ -188,6 +188,8 @@ public class GameScen extends JPanel {
                         System.out.print(" ");
                     else {
                         obstacles[i].MoveDownObstacles();
+                        if (obstacles[i].getY()==400)
+                            score++;
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -224,8 +226,8 @@ public class GameScen extends JPanel {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
-                    if (play == true)
-                        score++;
+                    //  if (play == true)
+                      //  score++;
                     gameOver();
                     repaint();
                     Thread.sleep(5);

@@ -148,7 +148,7 @@ public class GameScen extends JPanel {
         }
         //win
         if (score >80) {
-            score = 80;
+            score =80;
         }
         if (score == 80) {
             play = false;

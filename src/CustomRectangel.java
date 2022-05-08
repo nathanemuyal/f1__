@@ -10,8 +10,8 @@ public class CustomRectangel extends Canvas {
     public int limit(int a) {
         if (a < 50) {
             return 50;
-        } else if (a >380) {
-            return 380;
+        } else if (a >390) {
+            return 390;
         } else {
             return a;
         }

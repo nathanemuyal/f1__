@@ -1,15 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.awt.event.KeyEvent;
 
 public class GameScen extends JPanel {
     private Car pleyer;
     boolean obstaclesCreated = false;
-    // private CustomRectangel[] obstacles;//עוד מעט שינוי
-    private ImageIcon I_no_have_idia;
-    private ImageIcon I_no_hve_idia2;
+    private ImageIcon shoulders_left;
+    private ImageIcon shoulders_right;
     private int y_image = 0;
     public boolean startGame = true;
     private ImageIcon logo;
@@ -17,30 +14,27 @@ public class GameScen extends JPanel {
     public boolean winer = true;
     public boolean play = false;
     public boolean button_restart = true;
+    public int y_shoulder = 0;
 
     private final JButton start = new JButton("start game");
     private final JButton restart = new JButton("Play again");
 
 
-
-
-    public GameScen(int x, int y, int WHIDTH, int HIGHET,Color color) {
+    public GameScen(int x, int y, int WHIDTH, int HIGHET, Color color) {
 
         this.setBounds(x, y, WHIDTH, HIGHET);
         //first screen  +button start +image +color gray in background
         this.logo = new ImageIcon("src/f1 logo final.png");
 
-        //sholders
-        this.I_no_have_idia = new ImageIcon("src/fian left.png");
+        //shoulders
+        this.shoulders_left = new ImageIcon("src/fian left.png");
+        this.shoulders_right = new ImageIcon("src/final right.png");
 
         //player
         this.pleyer = new Car();
         this.mainGameLoop();
 
 
-        //obstacles  +image obstacles +bug
-        // this.obstacles = new CustomRectangel[350];**
-        //  new_obstacles();**
 
 
     }
@@ -107,18 +101,31 @@ public class GameScen extends JPanel {
 
         }
 
-        if(play==true) {
+        if (play == true) {
             //score
             g.setColor(Color.black);
             g.setFont(new Font("serif", Font.BOLD, 20));
             g.drawString("Score " + score, getWidth() / 2 - 30, 20);
+
+            //player
+            this.pleyer.paintComponent(g);
+
+            //shoulders
+            g.drawImage(this.shoulders_left.getImage(), 0, y_shoulder, 70, 220, null);
+            g.drawImage(this.shoulders_left.getImage(), 0, y_shoulder+300+220, 70, 220, null);
+
+            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder +150, 70, 220, null);
+            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder + 450+220, 70, 220, null);
+
+            shoulders();
+
         }
-        //player
-        this.pleyer.paintComponent(g);
         //obstacle
+
         for (int i = 0; i < this.obstacles.length - 5; i++) {
             String c = obstacles[i].getPhoto();
             this.obstacles[i].paint(g, c);
+
 
             //restart
 
@@ -128,7 +135,7 @@ public class GameScen extends JPanel {
                     this.setLayout(null);
                     g.setColor(Color.red);
                     g.setFont(new Font("serif", Font.BOLD, 70));
-                    g.drawString("Game over ", getWidth()/2-170, 300);
+                    g.drawString("Game over ", getWidth() / 2 - 170, 300);
                     g.setColor(Color.orange);
                     g.setFont(new Font("serif", Font.TRUETYPE_FONT, 40));
                     g.drawString("your Score :" + score, 110, 60);
@@ -140,7 +147,7 @@ public class GameScen extends JPanel {
             }
         }
         //win
-        if (score > 1) {
+        if (score > 100000) {
             score = 100000;
         }
         if (score == 100000) {
@@ -151,7 +158,7 @@ public class GameScen extends JPanel {
             g.drawString("you win !", getWidth() / 2 - 100, 270);
 
 
-           reset_button();
+            reset_button();
 
 
         }
@@ -241,7 +248,8 @@ public class GameScen extends JPanel {
         String a = imageURL[random.nextInt(4)];
         return a;
     }
-    public void reset_button(){
+
+    public void reset_button() {
         if (button_restart = true) {
             restart.setVisible(true);
             button_restart = false;
@@ -262,5 +270,23 @@ public class GameScen extends JPanel {
 
     }
 
+    public void shoulders() {
+        new Thread(() -> {
+            if (play == true) {
+                y_shoulder++;
+                repaint();
+                if (y_shoulder > 1000) {
+                    y_shoulder = -500;
+                }
+                try {
+                    Thread.sleep(1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
+
+    }
 
 }

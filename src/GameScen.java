@@ -35,11 +35,9 @@ public class GameScen extends JPanel {
         this.mainGameLoop();
 
 
-
-
     }
 
-    public CustomRectangel[] obstacles = new CustomRectangel[80];
+    public CustomRectangel[] obstacles = new CustomRectangel[120];
 
     public void createObstacles() {
         for (int i = 0; i < obstacles.length; i++) {
@@ -68,8 +66,8 @@ public class GameScen extends JPanel {
 
     private void randomPlace(CustomRectangel obstacle) {
         Random rnd = new Random();
-        int lower = -20000;
-        int maxer = -100;
+        int lower = -30000;
+        int maxer = 1;
         ;
         int e = limit(rnd.nextInt(500));
         obstacle.setX(e);
@@ -107,17 +105,18 @@ public class GameScen extends JPanel {
             g.setFont(new Font("serif", Font.BOLD, 20));
             g.drawString("Score " + score, getWidth() / 2 - 30, 20);
 
-            //player
-            this.pleyer.paintComponent(g);
 
             //shoulders
             g.drawImage(this.shoulders_left.getImage(), 0, y_shoulder, 70, 220, null);
-            g.drawImage(this.shoulders_left.getImage(), 0, y_shoulder+300+220, 70, 220, null);
+            g.drawImage(this.shoulders_left.getImage(), 0, y_shoulder + 300 + 220, 70, 220, null);
 
-            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder +150, 70, 220, null);
-            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder + 450+220, 70, 220, null);
+            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder + 150, 70, 220, null);
+            g.drawImage(this.shoulders_right.getImage(), getWidth() - 70, y_shoulder + 450 + 220, 70, 220, null);
 
             shoulders();
+
+            //player
+            this.pleyer.paintComponent(g);
 
         }
         //obstacle
@@ -147,8 +146,8 @@ public class GameScen extends JPanel {
             }
         }
         //win
-        if (score >80) {
-            score =80;
+        if (score > 80) {
+            score = 80;
         }
         if (score == 80) {
             play = false;
@@ -188,7 +187,7 @@ public class GameScen extends JPanel {
                         System.out.print(" ");
                     else {
                         obstacles[i].MoveDownObstacles();
-                      if (obstacles[i].getY()==450)
+                        if (obstacles[i].getY() == 450)
                             score++;
                     }
                 } catch (NullPointerException e) {
@@ -226,8 +225,7 @@ public class GameScen extends JPanel {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
-                    //  if (play == true)
-                      //  score++;
+
                     gameOver();
                     repaint();
                     Thread.sleep(5);

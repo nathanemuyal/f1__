@@ -1,7 +1,7 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class PleyerMovment implements KeyListener {
+public class PleyerMovment  implements KeyListener {
     private Car pleyer;
 
     public PleyerMovment(Car car) {

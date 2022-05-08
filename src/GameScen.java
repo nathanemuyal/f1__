@@ -19,10 +19,12 @@ public class GameScen extends JPanel {
     public boolean button_restart = true;
 
     private final JButton start = new JButton("start game");
-    private final JButton restart = new JButton("Restart");
+    private final JButton restart = new JButton("Play again");
 
 
-    public GameScen(int x, int y, int WHIDTH, int HIGHET) {
+
+
+    public GameScen(int x, int y, int WHIDTH, int HIGHET,Color color) {
 
         this.setBounds(x, y, WHIDTH, HIGHET);
         //first screen  +button start +image +color gray in background
@@ -94,6 +96,7 @@ public class GameScen extends JPanel {
             start.setBounds(getWidth() / 2 - 50, getHeight() / 2, 100, 30);
             add(start);
 
+
             start.addActionListener((event) -> {
 
                 this.startGame = false;
@@ -123,11 +126,12 @@ public class GameScen extends JPanel {
                 if (winer == false) {
                     this.setVisible(true);
                     this.setLayout(null);
-                    g.setColor(Color.BLACK);
-                    g.setFont(new Font("serif", Font.BOLD, 50));
-                    g.drawString("Game over ", 140, 200);
-                    g.drawString(" enter to the restart ", getWidth() / 2 - 230, 250);
-                    g.drawString("your Score " + score, 110, 300);
+                    g.setColor(Color.red);
+                    g.setFont(new Font("serif", Font.BOLD, 70));
+                    g.drawString("Game over ", 100, 300);
+                    g.setColor(Color.orange);
+                    g.setFont(new Font("serif", Font.TRUETYPE_FONT, 40));
+                    g.drawString("your Score :" + score, 110, 60);
                     if (button_restart = true) {
                         restart.setVisible(true);
                         button_restart = false;
@@ -156,7 +160,7 @@ public class GameScen extends JPanel {
         if (score == 100000) {
             play = false;
             winer = true;
-            g.setColor(Color.black);
+            g.setColor(Color.red);
             g.setFont(new Font("serif", Font.BOLD, 50));
             g.drawString("you win", getWidth() / 2 - 75, 270);
             g.drawString(" enter to the restart ", getWidth() / 2 - 230, 325);

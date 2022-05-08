@@ -45,7 +45,7 @@ public class GameScen extends JPanel {
 
     }
 
-    public CustomRectangel[] obstacles = new CustomRectangel[150];
+    public CustomRectangel[] obstacles = new CustomRectangel[120];
 
     public void createObstacles() {
         for (int i = 0; i < obstacles.length; i++) {
@@ -107,12 +107,12 @@ public class GameScen extends JPanel {
 
         }
 
-
-        //score
-        g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 20));
-        g.drawString("Score " + score, getWidth() / 2 - 30, 20);
-
+        if(play==true) {
+            //score
+            g.setColor(Color.black);
+            g.setFont(new Font("serif", Font.BOLD, 20));
+            g.drawString("Score " + score, getWidth() / 2 - 30, 20);
+        }
         //player
         this.pleyer.paintComponent(g);
         //obstacle
@@ -128,52 +128,32 @@ public class GameScen extends JPanel {
                     this.setLayout(null);
                     g.setColor(Color.red);
                     g.setFont(new Font("serif", Font.BOLD, 70));
-                    g.drawString("Game over ", 100, 300);
+                    g.drawString("Game over ", getWidth()/2-170, 300);
                     g.setColor(Color.orange);
                     g.setFont(new Font("serif", Font.TRUETYPE_FONT, 40));
                     g.drawString("your Score :" + score, 110, 60);
-                    if (button_restart = true) {
-                        restart.setVisible(true);
-                        button_restart = false;
-                    }
 
-                    restart.setBounds(getWidth() / 2 - 75, 350, 150, 100);
-                    this.add(restart);
-                    restart.addActionListener((event) -> {
-                        //  new_obstacles();
-                        createObstacles();
-                        score = 0;
-                        play = true;
-                        winer = true;
-                        restart.setVisible(false);
-                        button_restart = true;
+                    reset_button();
 
-                    });
                 }
 
             }
         }
         //win
-        if (score > 100000) {
+        if (score > 1) {
             score = 100000;
         }
         if (score == 100000) {
             play = false;
             winer = true;
-            g.setColor(Color.red);
+            g.setColor(Color.green);
             g.setFont(new Font("serif", Font.BOLD, 50));
-            g.drawString("you win", getWidth() / 2 - 75, 270);
-            g.drawString(" enter to the restart ", getWidth() / 2 - 230, 325);
+            g.drawString("you win !", getWidth() / 2 - 100, 270);
 
-            restart.setBounds(getWidth() / 2 - 75, 350, 150, 100);
-            this.add(restart);
-            restart.addActionListener((event) -> {
-                play = true;
-                winer = true;
-                score = 0;
-                restart.setVisible(false);
 
-            });
+           reset_button();
+
+
         }
 
 
@@ -260,6 +240,26 @@ public class GameScen extends JPanel {
 
         String a = imageURL[random.nextInt(4)];
         return a;
+    }
+    public void reset_button(){
+        if (button_restart = true) {
+            restart.setVisible(true);
+            button_restart = false;
+        }
+
+        restart.setBounds(getWidth() / 2 - 75, 350, 150, 100);
+        this.add(restart);
+        restart.addActionListener((event) -> {
+            //  new_obstacles();
+            createObstacles();
+            score = 0;
+            play = true;
+            winer = true;
+            restart.setVisible(false);
+            button_restart = true;
+
+        });
+
     }
 
 

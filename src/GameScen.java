@@ -39,7 +39,7 @@ public class GameScen extends JPanel {
 
     }
 
-    public CustomRectangel[] obstacles = new CustomRectangel[120];
+    public CustomRectangel[] obstacles = new CustomRectangel[80];
 
     public void createObstacles() {
         for (int i = 0; i < obstacles.length; i++) {
@@ -68,7 +68,7 @@ public class GameScen extends JPanel {
 
     private void randomPlace(CustomRectangel obstacle) {
         Random rnd = new Random();
-        int lower = -30000;
+        int lower = -20000;
         int maxer = -100;
         ;
         int e = limit(rnd.nextInt(500));
@@ -147,10 +147,10 @@ public class GameScen extends JPanel {
             }
         }
         //win
-        if (score > 100000) {
-            score = 100000;
+        if (score >80) {
+            score = 80;
         }
-        if (score == 100000) {
+        if (score == 80) {
             play = false;
             winer = true;
             g.setColor(Color.green);
@@ -188,7 +188,7 @@ public class GameScen extends JPanel {
                         System.out.print(" ");
                     else {
                         obstacles[i].MoveDownObstacles();
-                        if (obstacles[i].getY()==400)
+                      if (obstacles[i].getY()==450)
                             score++;
                     }
                 } catch (NullPointerException e) {

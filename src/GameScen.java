@@ -276,7 +276,7 @@ public class GameScen extends JPanel {
                 y_shoulder++;
                 repaint();
                 if (y_shoulder > 1000) {
-                    y_shoulder = -500;
+                    y_shoulder = -1000;
                 }
                 try {
                     Thread.sleep(1);
